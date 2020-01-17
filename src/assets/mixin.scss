@@ -1,0 +1,20 @@
+$color: #2684FE;
+$background: #f5f5f5;
+$red: #F33644;
+$px70: 70px;
+$px46: 46px;
+$px260: 160px;
+@mixin transition {
+  transition: all 0.2s;
+}
+
+@mixin ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@mixin top_color($color) {
+  height: 0;
+  border-top: 1px solid $color;
+}

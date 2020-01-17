@@ -1,0 +1,338 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+//*{touch-action: none;}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+a{
+  text-decoration: none;
+  color: #666;
+}
+i,em{font-style: normal}
+.lf{float:left;}
+.rt{float:right;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  overflow: hidden;
+  font-family: 'PingFangSC-Light', 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', 'Arial', 'sans-serif';
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.clearfix{zoom:1;}
+.clearfix:before,.clearfix:after{display: table;line-height: 0;content:"";}
+.clearfix:after{clear:both;}
+img{border: none;}
+input,button,textarea,select{outline: none;background-color: #fff}
+// 自定义样式区域 start
+#app {
+  height: 100%;
+  overflow: hidden;
+}
+.is100 {
+  height: 100%;
+}
+.content{
+  height: 100%;
+  padding: 60px 10px 10px 10px;
+  box-sizing: border-box;
+  position: relative;
+}
+.headerMain .router-link-active{
+  background-color: #222 !important;
+  color: #fff !important;
+  position: relative;
+}
+.headerMain .router-link-active:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  right: 0;
+  top: 50%;
+  margin-top: -4px;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-right: 8px solid #fff;
+}
+.router-link-active {
+  background-color: #fff !important;
+  color: #2684fe !important;
+}
+.el-submenu .el-menu-item{
+  overflow: hidden;
+}
+.slideSwiper-enter-active {
+  transition: all 0.2s linear 0.1s;
+}
+.slideSwiper-enter {
+  transform: translate(-50px, 0);
+  opacity: 0;
+}
+.slideSwiper-leave-active{
+  transition: all 0.2s linear;
+  transform: translate(50px, 0);
+  opacity: 0;
+  z-index: 100;
+}
+.el-table td {
+  padding: 5px 0 !important;
+}
+.el-table th {
+  padding: 10px 0 !important;
+}
+.editInput .el-input__inner {
+  width: 150px !important;
+}
+.searchTree .el-input__inner {
+  width: 100% !important;
+}
+.el-dialog__header {
+  padding: 15px 20px !important;
+  background-color: #f0f0f0;
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 0;
+    bottom: 0;
+    border-top: 1px solid #ddd;
+  }
+}
+.el-dialog{
+  display: flex;
+  flex-direction: column;
+  margin:0 !important;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  max-height:calc(100% - 30px);
+  max-width:calc(100% - 30px);
+}
+.el-dialog .el-dialog__body{
+  flex:1;
+  overflow: auto;
+}
+.el-dialog__wrapper {
+  overflow: hidden !important;
+}
+.dialogList {
+  overflow: hidden;
+}
+.treeDialogList .el-dialog .el-dialog__body{
+  overflow: initial;
+  overflow: inherit;
+  overflow: visible;
+}
+.titleList {
+  height: 30px;
+  line-height: 30px;
+  border-radius: 3px;
+  padding: 5px 10px;
+  background-color: #e0edf5;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #333;
+}
+.lineTitle {
+  height: 0;
+  border-top: 1px solid #ddd;
+}
+.bottomNone {
+  margin-bottom: 0 !important;
+}
+.blockInput {
+  display: block !important;
+}
+.blockInput .el-form-item__content {
+  width: 500px;
+}
+.blockInput .el-input__inner{
+  width: 100% !important;
+}
+.whiteBack {
+  background-color: #fff;
+  height: 100%;
+  box-sizing: border-box;
+}
+.el-pagination{
+  span:not([class*=suffix]) , button , .el-input__inner{
+    height: 32px !important;
+    line-height: 32px !important;
+  }
+  .el-pager {
+    li {
+      height: 32px !important;
+      line-height: 32px !important;
+    }
+  }
+}
+.treeScroll .el-scrollbar__wrap, .managementScroll .el-scrollbar__wrap {
+  padding-bottom: 18px;
+  margin-bottom: 0 !important;
+}
+.JurisdictionScroll .el-scrollbar__wrap {
+  overflow-x: hidden;
+  margin-bottom: 0 !important;
+}
+.el-form-item--feedback .el-input__suffix .el-input__validateIcon.el-icon-circle-check:before {
+  color: #007DFF;
+}
+.el-dialog__footer {
+  padding: 15px 20px !important;
+  background-color: #f3f3f3;
+}
+.treeDialogList .el-dialog__body {
+  padding: 30px 20px 15px;
+}
+.treeEdit {
+  display: flex;
+  padding: 30px 50px;
+  flex-flow: row nowrap;
+  justify-content: center;
+  .treeList {
+    flex: 1;
+    margin: 0 15px;
+    background-color: #f7f7f7;
+    box-shadow: 0 0 4px 2px #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    .el-tree-col {
+      background-color: transparent;
+      .el-button--mini {
+        padding: 4px 10px;
+      }
+      .el-tree-node:focus > .el-tree-node__content {
+        background-color: #ddd;
+        border-radius: 3px;
+      }
+      .el-tree-node__content {
+        &:hover {
+          background-color: #ddd;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}
+.custom-tree-node {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  padding-right: 8px;
+}
+.scrollHidden .el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+.windowText {
+  .el-checkbox {
+    width: 150px;
+  }
+  .el-select {
+    width: 160px;
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.windowProp {
+  .el-form-item {
+    width: 160px;
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.resetError {
+  .el-form-item__error {
+    top: 40px;
+  }
+}
+.managementContent {
+  .el-checkbox__label {
+    padding-left: 4px;
+  }
+  .el-checkbox__input {
+    top: -1px;
+  }
+  .list {
+    .personList {
+      .el-checkbox__label {
+        font-size: 16px;
+        color: #888;
+        padding-left: 9px;
+      }
+    }
+  }
+}
+.routerThis {
+  .el-menu-item, .el-submenu__title {
+    height: 50px;
+    line-height: 50px;
+  }
+  .el-submenu__title {
+    padding: 0 10px !important;
+    background-color: #f0f0f0 !important;
+    .el-submenu__icon-arrow {
+      margin-top: -4px;
+    }
+  }
+}
+.el-menu--collapse {
+  .routerThis .el-submenu__title {
+    padding-left: 20px !important;
+  }
+}
