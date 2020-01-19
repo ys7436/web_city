@@ -9,9 +9,14 @@ const users = {
     nowActives: '',
     breadcrumbHtml: [],
     headerBreadcrumbHtml: '首页',
-    onceBreadcrumbHtml: true
+    onceBreadcrumbHtml: true,
+    clientHeight: 0,
+    remember: true
   },
   mutations: {
+    setRemember (state, value) {
+      state.remember = value
+    },
     setCollapse (state, value) {
       state.isCollapse = value
     },
@@ -22,14 +27,16 @@ const users = {
     },
     setToken (state, value) {
       state.isToken = value
-      localStorage.setItem('isToken', value)
+      if (this.state) localStorage.setItem('isToken', value)
+      else sessionStorage.setItem('isToken', value)
     },
     setIslogin (state, value) {
       state.isLogin = value
     },
     setUserInfo (state, value) {
       state.userInfo = value
-      localStorage.setItem('userInfo', value)
+      if (this.state) localStorage.setItem('userInfo', JSON.stringify(value))
+      else sessionStorage.setItem('userInfo', JSON.stringify(value))
     },
     setNowActive (state, value) {
       state.nowActives = value
@@ -43,6 +50,9 @@ const users = {
     },
     setOnceBreadcrumbHtml (state, value) {
       state.onceBreadcrumbHtml = value
+    },
+    setClientHeight (state, value) {
+      state.clientHeight = value
     }
   },
   getters: {
@@ -73,6 +83,8 @@ const users = {
     loginOut ({ commit }, that) {
       localStorage.removeItem('isToken')
       localStorage.removeItem('userInfo')
+      sessionStorage.removeItem('isToken')
+      sessionStorage.removeItem('userInfo')
       commit('setToken', '')
       commit('setUserInfo', '')
       commit('setIslogin', false)

@@ -77,10 +77,11 @@ input,button,textarea,select{outline: none;background-color: #fff}
 }
 .is100 {
   height: 100%;
+  background-color: #f9f9f9;
 }
 .content{
   height: 100%;
-  padding: 60px 10px 10px 10px;
+  padding: 70px 30px 20px 30px;
   box-sizing: border-box;
   position: relative;
 }
@@ -127,8 +128,15 @@ input,button,textarea,select{outline: none;background-color: #fff}
 .el-table th {
   padding: 10px 0 !important;
 }
-.editInput .el-input__inner {
-  width: 150px !important;
+.editInput {
+  .el-input__inner {
+    width: 150px !important;
+  }
+  .dateForm {
+    .el-input__inner {
+      width: auto !important;
+    }
+  }
 }
 .searchTree .el-input__inner {
   width: 100% !important;
@@ -200,7 +208,7 @@ input,button,textarea,select{outline: none;background-color: #fff}
   width: 100% !important;
 }
 .whiteBack {
-  background-color: #fff;
+  background-color: #f9f9f9;
   height: 100%;
   box-sizing: border-box;
 }
@@ -242,11 +250,41 @@ input,button,textarea,select{outline: none;background-color: #fff}
   .treeList {
     flex: 1;
     margin: 0 15px;
-    background-color: #f7f7f7;
-    box-shadow: 0 0 4px 2px #ddd;
-    border-radius: 4px;
-    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding-bottom: 20px;
+    .demo-ruleForm {
+      padding: 0 20px;
+    }
+    .treeTitle {
+      height: 59px;
+      line-height: 59px;
+      border-bottom: 1px solid #ddd;
+      padding: 0 20px;
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    &.treeListForm {
+      .el-form-item__label {
+        height: 59px;
+        line-height: 59px;
+        border-bottom: 1px solid #ddd;
+        padding: 0 20px;
+        float: none;
+        display: block;
+        text-align: left;
+        font-size: 16px;
+        color: #333;
+        margin: 0 0 20px 0;
+      }
+      .el-form-item__content {
+        margin-left: 0 !important;
+        padding: 0 20px;
+      }
+    }
     .el-tree-col {
+      padding: 0 20px;
       background-color: transparent;
       .el-button--mini {
         padding: 4px 10px;
@@ -335,4 +373,31 @@ input,button,textarea,select{outline: none;background-color: #fff}
   .routerThis .el-submenu__title {
     padding-left: 20px !important;
   }
+}
+.whiteTable {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+}
+.whiteForm {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+.scopeImg {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+.loginMain .el-input__inner {
+  height: 40px;
+  line-height: 40px;
+  border-radius: 0;
+  background-color: rgba(106, 176, 254, .2);
+  color: #fff;
+}
+.checkPassword .el-form-item__content {
+  line-height: 25px;
 }

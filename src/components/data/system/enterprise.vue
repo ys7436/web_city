@@ -1,12 +1,9 @@
 <template>
   <div class="whiteBack">
-    <div class="editInput">
+    <div class="whiteForm editInput">
       <el-form :inline="true" :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="姓名：" prop="username">
           <el-input v-model.trim="ruleForm.username" placeholder="请输入姓名" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="账号/手机：" prop="phone">
-          <el-input v-model.trim="ruleForm.phone" placeholder="请输入账号/手机" autocomplete="off"></el-input>
         </el-form-item>
         <tree-data class="el-form-item el-form-item--feedback" :company="ruleForm.company" :treeData="treeData" leftNumber="100px" @changeCompany="changeCompany"></tree-data>
         <el-form-item label="角色：" prop="role">
@@ -31,9 +28,11 @@
         </el-form-item>
       </el-form>
     </div>
-    <table-colum :loading="loading" :tableHead="tableHead" :tableData="tableData" :status="tableStatus"
-                 @handleCheckBox="editCheckBox" @handleRow="editMessage" @deleteRow="deleteRow"></table-colum>
-    <page-size :total="total" :currentPage="currentPage" :pageSize="pageSize" @tableDataSize="tableSize" @tableDataPage="tablePage"></page-size>
+    <div class="whiteTable">
+      <table-colum :loading="loading" :tableHead="tableHead" :tableData="tableData" :status="tableStatus"
+                   @handleCheckBox="editCheckBox" @handleRow="editMessage" @deleteRow="deleteRow"></table-colum>
+      <page-size :total="total" :currentPage="currentPage" :pageSize="pageSize" @tableDataSize="tableSize" @tableDataPage="tablePage"></page-size>
+    </div>
     <el-dialog class="treeDialogList" title="人员添加 / 编辑" :visible.sync="dialogVisible" width="400px" :before-close="handleClose">
       <div class="dialogList inputAuto">
         <el-form :model="ruleDialog" :rules="ruleValidata" status-icon ref="dialogItem" label-width="100px" class="demo-ruleForm">
@@ -206,7 +205,7 @@ export default {
       console.log('删除此行', val)
     },
     changeCompany (val) {
-      this.ruleForm.company = val
+      this.ruleForm.company = val.data.label
     },
     editDetail (fromNode) {
       this.$refs[fromNode].validate((valid) => {

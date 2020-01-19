@@ -1,9 +1,9 @@
 <template>
   <div class="whiteBack treeEdit">
-    <div class="treeList">
-      <el-form class="contentSearch" status-icon label-width="90px">
-        <el-form-item label="机构名称：">
-          <el-input placeholder="输入关键查找" v-model="filterText"></el-input>
+    <div class="treeList treeListForm">
+      <el-form class="contentSearch" status-icon label-width="100%">
+        <el-form-item label="机构名称">
+          <el-input placeholder="输入关键查找" v-model="filterText"><i slot="prefix" class="el-input__icon el-icon-search"></i></el-input>
         </el-form-item>
       </el-form>
       <el-tree class="el-tree-col" :data="dataList" node-key="id" default-expand-all :filter-node-method="filterNode" :draggable="draggable"
@@ -11,7 +11,7 @@
       </el-tree>
     </div>
     <div class="treeList">
-      <div class="titleList">编辑机构</div>
+      <div class="treeTitle">机构信息</div>
       <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="机构名称：">
           <el-input v-model.trim="ruleForm.companyName" placeholder="请输入机构名称" :disabled="ruleDisabled.companyName" autocomplete="off"></el-input>

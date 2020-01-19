@@ -31,7 +31,7 @@ class HttpRequest {
     instence.interceptors.request.use((config) => {
       // Do something before request is sent
       // console.log('config', config)
-      const token = store.state.isToken
+      const token = store.state.users.isToken
       if (token) {
         config.headers.Authorization = 'Bearer ' + token
       }

@@ -27,7 +27,10 @@ const exportExcel = (name, elem) => {
   }
   return wbout
 }
-
+const height = (that, nums) => {
+  return (that.$el.clientHeight - nums).toString()
+}
 export {
-  exportExcel
+  exportExcel,
+  height
 }

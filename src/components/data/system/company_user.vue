@@ -1,6 +1,6 @@
 <template>
   <div class="whiteBack">
-    <div class="editInput">
+    <div class="whiteForm editInput">
       <el-form :inline="true" :model="ruleForm" status-icon ref="ruleForm" :rules="rules" label-width="80px" class="demo-ruleForm">
         <el-form-item label="账号：" prop="account">
           <el-input v-model.trim="ruleForm.account" placeholder="请输入账号" autocomplete="off"></el-input>
@@ -22,9 +22,11 @@
         </el-form-item>
       </el-form>
     </div>
-    <table-colum :loading="loading" :tableHead="tableHead" :tableData="tableData" :status="tableStatus"
-                 @handleCheckBox="editCheckBox" @handleRow="editMessage" @deleteRow="deleteRow"></table-colum>
-    <page-size :total="total" :currentPage="currentPage" :pageSize="pageSize" @tableDataSize="tableSize" @tableDataPage="tablePage"></page-size>
+    <div class="whiteTable">
+      <table-colum :loading="loading" :tableHead="tableHead" :tableData="tableData" :status="tableStatus"
+                   @handleCheckBox="editCheckBox" @handleRow="editMessage" @deleteRow="deleteRow"></table-colum>
+      <page-size :total="total" :currentPage="currentPage" :pageSize="pageSize" @tableDataSize="tableSize" @tableDataPage="tablePage"></page-size>
+    </div>
     <el-dialog class="treeDialogList" title="单位用户编辑" :visible.sync="dialogVisible" width="400px" :before-close="handleClose">
       <div class="dialogList inputAuto">
         <el-form ref="dialogItem" :model="ruleDialog" status-icon :rules="DialogRules" class="demo-form-inline" label-width="100px">
@@ -86,12 +88,12 @@ export default {
         { align: 'center', prop: 'status', name: '状态', width: 'auto' }
       ],
       tableData: [
-        { name: '王小虎1', account_number: '34012126661', company: '庐阳交警大队', role: '系统管理员1', status: '已分配' },
-        { name: '王小虎2', account_number: '34012126662', company: '庐阳交警大队', role: '系统管理员2', status: '已分配' },
-        { name: '王小虎3', account_number: '34012126663', company: '庐阳交警大队', role: '系统管理员3', status: '已分配' },
-        { name: '王小虎4', account_number: '34012126664', company: '庐阳交警大队', role: '系统管理员4', status: '已分配' },
-        { name: '王小虎5', account_number: '34012126665', company: '庐阳交警大队', role: '系统管理员5', status: '已分配' },
-        { name: '王小虎6', account_number: '34012126666', company: '庐阳交警大队', role: '系统管理员6', status: '已分配' }
+        { name: '王小虎1', account_number: '34012126661', company: '街道办事处', role: '系统管理员1', status: '已分配' },
+        { name: '王小虎2', account_number: '34012126662', company: '街道办事处', role: '系统管理员2', status: '已分配' },
+        { name: '王小虎3', account_number: '34012126663', company: '街道办事处', role: '系统管理员3', status: '已分配' },
+        { name: '王小虎4', account_number: '34012126664', company: '街道办事处', role: '系统管理员4', status: '已分配' },
+        { name: '王小虎5', account_number: '34012126665', company: '街道办事处', role: '系统管理员5', status: '已分配' },
+        { name: '王小虎6', account_number: '34012126666', company: '街道办事处', role: '系统管理员6', status: '已分配' }
       ],
       loading: false,
       multipleSelection: null,
