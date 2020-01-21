@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '@/store'
 import systemRouter from './system'
 import deviceRouter from './device'
 /* !!!: 懒加载 */
@@ -61,7 +62,19 @@ const router = new VueRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
-  next()
+  const token = localStorage.getItem('isToken') || sessionStorage.getItem('isToken')
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  if (token !== '' && userInfo) {
+    store.commit('setUserInfo', userInfo)
+    store.commit('setToken', token)
+    store.commit('setIslogin', true)
+    next()
+  } else {
+    store.commit('setUserInfo', '')
+    store.commit('setToken', '')
+    store.commit('setIslogin', false)
+    next('/login')
+  }
 })
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push (location) {

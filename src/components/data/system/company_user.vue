@@ -1,17 +1,20 @@
 <template>
   <div class="whiteBack">
     <div class="whiteForm editInput">
-      <el-form :inline="true" :model="ruleForm" status-icon ref="ruleForm" :rules="rules" label-width="80px" class="demo-ruleForm">
-        <el-form-item label="账号：" prop="account">
-          <el-input v-model.trim="ruleForm.account" placeholder="请输入账号" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="姓名：" prop="username">
-          <el-input v-model.trim="ruleForm.username" placeholder="请输入姓名" autocomplete="off"></el-input>
+      <el-form :inline="true" :model="ruleForm" status-icon ref="ruleForm" :rules="rules" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="用户：" prop="account">
+          <el-input v-model.trim="ruleForm.account" placeholder="请输入用户" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="角色：" prop="role">
           <el-input v-model.trim="ruleForm.role" placeholder="请输入角色" autocomplete="off"></el-input>
         </el-form-item>
-        <cascade :floorUnit="false" :selectType="selectType" @changeSelect="changeSelect"></cascade>
+        <el-form-item label="状态：" prop="status">
+          <el-select v-model="ruleForm.status" placeholder="请选择状态" filterable>
+            <el-option label="启用" value="1"></el-option>
+            <el-option label="停用" value="2"></el-option>
+          </el-select>
+        </el-form-item>
+        <tree-data class="el-form-item el-form-item--feedback" :company="ruleForm.company" :treeData="treeData" leftNumber="100px" @changeCompany="changeRole"></tree-data>
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" @click="submitForm('ruleForm')">查询</el-button>
           <el-button icon="el-icon-set-up" @click="resetForm('ruleForm')">重置</el-button>
@@ -46,10 +49,11 @@
           </el-form-item>
           <tree-data :treeData="treeData" :company="ruleDialog.company" leftNumber="100px" @changeCompany="changeCompany"></tree-data>
           <el-form-item label="是否启用：" prop="resource" class="bottomNone">
-            <el-radio-group v-model="ruleDialog.resource">
-              <el-radio label="1">启用</el-radio>
-              <el-radio label="2">停用</el-radio>
-            </el-radio-group>
+            <el-switch
+              v-model="ruleDialog.resource"
+              active-text="是"
+              inactive-text="否">
+            </el-switch>
           </el-form-item>
         </el-form>
       </div>
@@ -62,22 +66,22 @@
 </template>
 
 <script>
-import cascade from '../../common/cascade'
 import TableColum from '../../common/tablecolum'
 import PageSize from '../../common/pageSize'
 import TreeData from '../../common/treeData'
 import { exportExcel } from '../../../utils/function'
 import { getTree } from '../../../api/slidebar'
+import { languageList } from '../../../utils/validate'
 export default {
   name: 'company_user',
   data () {
     return {
-      selectType: false,
       regionList: {},
       ruleForm: {
         account: '',
-        username: '',
-        role: ''
+        status: '',
+        role: '',
+        company: ''
       },
       rules: {},
       tableHead: [
@@ -110,17 +114,15 @@ export default {
         resource: '1'
       },
       DialogRules: {
-        name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
-        phone: [{ required: true, message: '请输入手机号', trigger: 'blur' }],
-        company: [{ required: true, message: '请选择机构', trigger: 'blur' }],
-        role: [{ required: true, message: '请选择角色', trigger: 'change' }],
-        resource: [{ required: true, message: '请确定是否启用', trigger: 'change' }]
+        name: [{ required: true, message: languageList.name, trigger: 'blur' }],
+        phone: [{ required: true, message: languageList.rePhone, trigger: 'blur' }],
+        company: [{ required: true, message: languageList.mechanism, trigger: 'blur' }],
+        role: [{ required: true, message: languageList.role, trigger: 'change' }]
       },
       treeData: []
     }
   },
   components: {
-    cascade,
     TableColum,
     PageSize,
     TreeData
@@ -176,10 +178,6 @@ export default {
       this.selectType = true
       this.$refs[formName].resetFields()
     },
-    changeSelect (val) {
-      this.regionList = val
-      this.selectType = false
-    },
     editCheckBox (val) {
       this.multipleSelection = val
     },
@@ -219,6 +217,9 @@ export default {
     },
     changeCompany (val) {
       this.ruleDialog.company = val.data.label
+    },
+    changeRole (val) {
+      this.ruleForm.company = val.data.label
     }
   }
 }

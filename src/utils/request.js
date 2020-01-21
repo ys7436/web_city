@@ -1,8 +1,10 @@
 import HttpRequest from './axios'
-import config from '../config'
-const baseUrl = process.env.NODE_ENV === 'development'
-  ? config.baseUrl.dev
-  : config.baseUrl.pro
-const axios = new HttpRequest(baseUrl)
-
-export default axios
+import { normalBaseUrl, doneBaseUrl, loginBaseUrl } from '../config/location'
+const normalAxios = new HttpRequest({ url: normalBaseUrl, status: false })
+const doneAxios = new HttpRequest({ url: doneBaseUrl, status: false })
+const loginAxios = new HttpRequest({ url: loginBaseUrl, status: true })
+export {
+  normalAxios,
+  doneAxios,
+  loginAxios
+}

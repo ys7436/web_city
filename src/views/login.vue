@@ -11,36 +11,43 @@
         <img class="identification d3" src="../assets/images/d3.png" alt="">
         <img src="../assets/images/map.png" alt="">
       </div>
-      <div class="login">
-        <div class="loginInner">
-          <div class="lightLeft">
-            <div class="light"></div>
-          </div>
-          <div class="lightRight">
-            <div class="light"></div>
-          </div>
-          <div class="lightTop">
-            <div class="light"></div>
-          </div>
-          <div class="lightBottom">
-            <div class="light"></div>
-          </div>
-          <div class="loginMain">
-            <div class="loginName">用户登录</div>
-            <el-form :model="ruleForm" :rules="rule" status-icon ref="ruleForm" label-width="0" class="demo-ruleForm">
-              <el-form-item class="elB" label="" prop="username">
-                <el-input v-model.trim="ruleForm.username" placeholder="账号" autocomplete="off"></el-input>
-              </el-form-item>
-              <el-form-item class="elB"  label="" prop="password">
-                <el-input v-model.trim="ruleForm.password" show-password placeholder="密码" autocomplete="off"></el-input>
-              </el-form-item>
-              <el-form-item class="checkPassword" prop="checked">
-                <el-checkbox @change="changeLocal" v-model="ruleForm.checked">记住密码</el-checkbox>
-              </el-form-item>
-              <el-form-item>
-                <el-button class="blockInput" type="primary" @click="loginTo('ruleForm')">登录</el-button>
-              </el-form-item>
-            </el-form>
+      <div class="earthTranslate">
+        <div class="earthRotate">
+          <img src="../assets/images/earth.gif" alt="">
+          <div class="halo"></div>
+          <div class="shadow"></div>
+        </div>
+        <div class="login">
+          <div class="loginInner">
+            <div class="lightLeft">
+              <div class="light"></div>
+            </div>
+            <div class="lightRight">
+              <div class="light"></div>
+            </div>
+            <div class="lightTop">
+              <div class="light"></div>
+            </div>
+            <div class="lightBottom">
+              <div class="light"></div>
+            </div>
+            <div class="loginMain">
+              <div class="loginName">用户登录</div>
+              <el-form :model="ruleForm" :rules="rule" status-icon ref="ruleForm" label-width="0" class="demo-ruleForm">
+                <el-form-item class="elB" label="" prop="username">
+                  <el-input v-model.trim="ruleForm.username" placeholder="账号" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item class="elB"  label="" prop="password">
+                  <el-input v-model.trim="ruleForm.password" show-password placeholder="密码" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item class="checkPassword" prop="checked">
+                  <el-checkbox @change="changeLocal" v-model="checked">记住密码</el-checkbox>
+                </el-form-item>
+                <el-form-item>
+                  <el-button class="blockInput" type="primary" @click="loginTo('ruleForm')">登录</el-button>
+                </el-form-item>
+              </el-form>
+            </div>
           </div>
         </div>
       </div>
@@ -51,6 +58,8 @@
 
 <script>
 import { languageList } from '../utils/validate'
+import { login } from '../api/login/login'
+import { mapMutations } from 'vuex'
 export default {
   name: 'login',
   data () {
@@ -59,8 +68,10 @@ export default {
       ruleForm: {
         username: '',
         password: '',
-        checked: true
+        grant_type: 'password',
+        auth_type: 'manager'
       },
+      checked: true,
       rule: {
         username: [{ required: true, message: languageList.name, trigger: 'blur' }],
         password: [{ required: true, message: languageList.password, trigger: 'blur' }]
@@ -68,6 +79,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['setToken', 'setIslogin', 'setUserInfo']),
     leftMax () {
       return Math.floor(Math.random() * (580 - 20 + 1) + 20) + 'px'
     },
@@ -77,10 +89,28 @@ export default {
     millisecond () {
       return Math.floor(Math.random() * (3000 - 1000 + 1) + 1000) + 'ms'
     },
-    loginTo (formName) {
+    async loginTo (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log(this.ruleForm)
+          login(this.ruleForm).then(res => {
+            if (res.code === 0) {
+              this.setToken(res.data.access_token)
+              this.setIslogin(true)
+              this.setUserInfo(JSON.stringify(res.data))
+              this.$router.push('/index/home')
+            } else {
+              this.$notify({
+                title: '警告',
+                message: res.data.msg,
+                type: 'warning'
+              })
+            }
+          }).catch(() => {
+            this.$notify.error({
+              title: '错误',
+              message: '服务器获取数据异常'
+            })
+          })
         } else {
           return false
         }
@@ -131,14 +161,15 @@ export default {
         height: 454px;
         padding: 11px;
         position: absolute;
-        right: 140px;
-        top: 50%;
-        margin-top: -238px;
+        right: 160px;
+        top: 107px;
+        z-index: 30;
         background-image: url("../assets/images/border.png");
         @include backImage;
         .loginInner {
           position: relative;
           height: 100%;
+          z-index: 50;
           .lightLeft, .lightRight, .lightTop, .lightBottom {
             position: absolute;
             overflow: hidden;
@@ -219,7 +250,7 @@ export default {
       position: absolute;
       padding-top: 160px;
       padding-bottom: 70px;
-      left: 0;
+      left: 10%;
       top: 50%;
       margin-top: -313px;
       .mapWater {
@@ -268,6 +299,7 @@ export default {
     }
     .checkPassword {
       text-align: right;
+      color: #fff;
     }
     .loginName {
       height: 52px;
@@ -277,5 +309,36 @@ export default {
       color: #5aa3f4;
       margin-bottom: 25px;
     }
+  }
+  .earthRotate {
+    width: 694px;
+    height: 694px;
+    position: relative;
+    .halo {
+      width: 241px;
+      height: 527px;
+      background-image: url("../assets/images/box.png");
+      @include backImage;
+      position: absolute;
+      right: 60px;
+      top: 55px;
+      z-index: 10;
+    }
+    .shadow {
+      width: 694px;
+      height: 694px;
+      background-image: url("../assets/images/shadow.png");
+      @include backImage;
+      z-index: 20;
+      position: absolute;
+      right: -65px;
+      top: 0;
+    }
+  }
+  .earthTranslate {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -347px;
   }
 </style>

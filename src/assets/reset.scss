@@ -207,6 +207,12 @@ input,button,textarea,select{outline: none;background-color: #fff}
 .blockInput .el-input__inner{
   width: 100% !important;
 }
+.blockDate {
+  .el-date-editor.el-input, .el-date-editor.el-input__inner {
+    width: auto !important;
+    display: block;
+  }
+}
 .whiteBack {
   background-color: #f9f9f9;
   height: 100%;
@@ -398,6 +404,15 @@ input,button,textarea,select{outline: none;background-color: #fff}
   background-color: rgba(106, 176, 254, .2);
   color: #fff;
 }
-.checkPassword .el-form-item__content {
-  line-height: 25px;
+.checkPassword {
+  .el-form-item__content {
+    line-height: 25px;
+  }
+  .el-checkbox__label {
+    color: #fff;
+  }
+  .el-checkbox__inner {
+    background-color: transparent;
+    border-color: #fff;
+  }
 }

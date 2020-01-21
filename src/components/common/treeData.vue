@@ -1,6 +1,6 @@
 <template>
   <div class="treeMessage">
-    <el-form-item label="归属机构：" prop="company" v-if="position">
+    <el-form-item :label="labelName" prop="company" v-if="position">
       <el-input v-model.trim="treeMessage" placeholder="请选择归属机构" autocomplete="off" readonly @focus="treeShow"></el-input>
     </el-form-item>
     <transition name="slideUp">
@@ -23,6 +23,10 @@
 export default {
   name: 'treeData',
   props: {
+    labelName: {
+      type: String,
+      default: '归属机构：'
+    },
     treeData: {
       type: Array,
       default: () => []

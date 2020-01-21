@@ -179,6 +179,7 @@ export default {
     border: 1px solid #ddd;
     margin-bottom: 20px;
     padding-bottom: 20px;
+    background-color: #fff;
     .title, .roleBtn {
       height: 50px;
       line-height: 50px;

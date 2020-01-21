@@ -2,10 +2,12 @@ import axios from 'axios'
 // import Router from '../router'
 import errorHandle from './errorHandle'
 import store from '../store'
+import PublicConfig from '../config'
 const CancleToken = axios.CancelToken
 class HttpRequest {
-  constructor (baseUrl) {
-    this.baseUrl = baseUrl
+  constructor (data) {
+    this.baseUrl = data.url
+    this.status = data.status
     this.pending = {}
   }
   /* !!!: 获取配置 */
@@ -13,7 +15,7 @@ class HttpRequest {
     const config = {
       baseURL: this.baseUrl,
       headers: {
-        'Content-Type': 'application/json;charset=utf-8'
+        'Content-Type': !this.status ? 'application/json;charset=utf-8' : 'application/x-www-form-urlencoded'
       },
       timeout: 100000
     }
@@ -30,10 +32,15 @@ class HttpRequest {
     // 发送请求拦截器
     instence.interceptors.request.use((config) => {
       // Do something before request is sent
-      // console.log('config', config)
+      let isPublic = false
+      PublicConfig.publicPath.map((path) => {
+        isPublic = isPublic || path.test(config.baseURL)
+      })
       const token = store.state.users.isToken
-      if (token) {
+      if (!isPublic && token) {
         config.headers.Authorization = 'Bearer ' + token
+      } else if (isPublic && !token) {
+        config.headers.Authorization = 'Basic ' + 'c25fcmVjeWNsZTpzbmtqXzIwMTkhMTY4'
       }
       // 这里如果没有token或者过期可以直接跳转到login，重新登录
       // else {

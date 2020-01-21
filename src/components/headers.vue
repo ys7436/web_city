@@ -111,6 +111,8 @@ export default {
           if (oldHerf !== item) {
             link && this.$router.push(link)
           }
+        }).catch(err => {
+          console.log(err)
         })
       }
       setTimeout(() => {

@@ -1,7 +1,14 @@
 export default {
   baseUrl: {
-    dev: 'http://localhost:824/',
-    // dev: '/api/',
-    pro: 'http://www.tomic.com'
-  }
+    dev: {
+      normal: '/nginx/',
+      done: '/test/',
+      obtain: '/obtain/'
+    },
+    pro: {
+      done: '/api/',
+      public: '/public/'
+    }
+  },
+  publicPath: [/^\/public/, /^\/obtain/]
 }

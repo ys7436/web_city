@@ -5,13 +5,13 @@
         <el-form-item label="姓名：" prop="username">
           <el-input v-model.trim="ruleForm.username" placeholder="请输入姓名" autocomplete="off"></el-input>
         </el-form-item>
-        <tree-data class="el-form-item el-form-item--feedback" :company="ruleForm.company" :treeData="treeData" leftNumber="100px" @changeCompany="changeCompany"></tree-data>
         <el-form-item label="角色：" prop="role">
           <el-select v-model="ruleForm.role" placeholder="请选择角色" @change="roleChange" filterable>
             <el-option label="街道一" value="j1"></el-option>
             <el-option label="街道二" value="j2"></el-option>
           </el-select>
         </el-form-item>
+        <tree-data class="el-form-item el-form-item--feedback" :company="ruleForm.company" :treeData="treeData" leftNumber="100px" @changeCompany="changeCompany"></tree-data>
         <el-form-item label="责任区域：" prop="region">
           <el-select v-model="ruleForm.region" placeholder="请选择责任区域" @change="regionChange" filterable>
             <el-option label="街道一" value="j1"></el-option>

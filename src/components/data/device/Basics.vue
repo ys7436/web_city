@@ -1,6 +1,6 @@
 <template>
   <div class="whiteBack">
-    <div class="editInput">
+    <div class="whiteForm editInput">
       <el-form :inline="true" :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="型号：">
           <el-input v-model.trim="ruleForm.models" placeholder="请输入型号" autocomplete="off"></el-input>
@@ -11,9 +11,11 @@
         </el-form-item>
       </el-form>
     </div>
-    <table-colum :loading="loading" :tableHead="tableHead" :tableData="tableData" :status="tableStatus"
-                 @handleCheckBox="editCheckBox" @handleRow="editMessage" @deleteRow="deleteRow"></table-colum>
-    <page-size :total="total" :currentPage="currentPage" :pageSize="pageSize" @tableDataSize="tableSize" @tableDataPage="tablePage"></page-size>
+    <div class="whiteTable">
+      <table-colum :loading="loading" :tableHead="tableHead" :tableData="tableData" :status="tableStatus"
+                   @handleCheckBox="editCheckBox" @handleRow="editMessage" @deleteRow="deleteRow"></table-colum>
+      <page-size :total="total" :currentPage="currentPage" :pageSize="pageSize" @tableDataSize="tableSize" @tableDataPage="tablePage"></page-size>
+    </div>
     <el-dialog class="treeDialogList resetError" title="基础数据添加/编辑" :visible.sync="dialogVisible" width="900px" :before-close="handleClose">
       <div class="dialogList inputAuto">
         <el-scrollbar :native="false" tag="div" class="treeScroll">

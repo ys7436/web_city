@@ -23,7 +23,8 @@ const languageList = {
   location: '请输入当前位置、名称',
   models: '请输入型号',
   bucket: '所选垃圾桶数量必须以4个投递口为基准',
-  reBucket: '请至少选择一项垃圾桶数量'
+  reBucket: '请至少选择一项垃圾桶数量',
+  mechanism: '请选择机构'
 }
 const regList = {
   PHONE: /^[1]([3-9])[0-9]{9}$/,
